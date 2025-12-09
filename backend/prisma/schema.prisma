@@ -7,4 +7,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Models will be added here later based on /docs/04_DATA_MODEL_OVERVIEW.md
+enum PlaceCategory {
+  FOOD
+  NIGHTLIFE
+  CULTURE
+  SERVICES
+  SPORTS
+  RELIGION
+  COMMUNITY
+  OTHER
+}
+
+enum PlaceStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum LanguageCode {
+  DE
+  EN
+  EN_US
+  HR
+  SR
+  BS
+}
+
+model City {
+  id           String   @id @default(uuid())
+  name         String
+  countryCode  String   // ISO code (e.g. DE, AT, CH)
+  lat          Float?
+  lon          Float?
+  places       Place[]
+  createdAt    DateTime @default(now())
+}
+
+model Place {
+  id            String             @id @default(uuid())
+  category      PlaceCategory
+  address       String
+  cityId        String
+  city          City               @relation(fields: [cityId], references: [id])
+  countryCode   String
+  lat           Float?
+  lon           Float?
+  tags          String[]           // e.g. ["cevapi", "turbo_folk"]
+  website       String?
+  instagram     String?
+  facebook      String?
+  phone         String?
+  images        String[]           // image URLs
+  status        PlaceStatus        @default(DRAFT)
+  ownerUserId   String?
+  translations  PlaceTranslation[]
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+}
+
+model PlaceTranslation {
+  id          String        @id @default(uuid())
+  placeId     String
+  place       Place         @relation(fields: [placeId], references: [id])
+  lang        LanguageCode
+  name        String
+  description String
+  slug        String        @unique
+}
