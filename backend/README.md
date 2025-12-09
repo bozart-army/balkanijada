@@ -26,25 +26,33 @@ Es stellt REST-APIs bereit für:
 ## 2. Projektstruktur (Backend)
 
 backend/
-• src/
-  • main.ts — Startpunkt der App
-  • app.module.ts — Hauptmodul
-  • modules/
-    • places/ — Places API (MVP-Skeleton)
-    • events/ — geplant
-    • stories/ — geplant
-    • users/ — geplant
-    • organizers/ — geplant
-  • common/ — Shared Utils, DTOs, Guards (später)
-  • config/ — spätere ENV-Konfiguration
+│
+├── src/
+│   ├── main.ts                # NestJS Bootstrap
+│   ├── app.module.ts          # Root Module – bindet alle Submodule ein
+│   │
+│   ├── modules/
+│   │   ├── places/            # Places API (MVP)
+│   │   │   ├── places.module.ts
+│   │   │   ├── places.controller.ts
+│   │   │   └── places.service.ts
+│   │   │
+│   │   ├── events/            # Events API (geplant)
+│   │   ├── stories/           # Stories API (geplant)
+│   │   ├── users/             # Auth & User Module (geplant)
+│   │   └── organizers/        # Organizer/Business Accounts (geplant)
+│   │
+│   ├── common/                # Shared Logic (DTOs, Interceptors, Guards)
+│   └── config/                # Env & App Config (später)
+│
+├── prisma/
+│   ├── schema.prisma          # Datenmodell (Cities, Places, Events, Users…)
+│   └── migrations/            # Prisma-Migrationen (auto-generiert)
+│
+├── package.json
+├── tsconfig.json
+└── README.md
 
-• prisma/
-  • schema.prisma — komplettes Datenmodell
-  • migrations/ — generiert durch Prisma
-
-• package.json
-• tsconfig.json
-• README.md
 
 ---
 
