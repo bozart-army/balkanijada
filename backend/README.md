@@ -151,22 +151,3 @@ Dieses Dokument wird erweitert, sobald neue Funktionen hinzukommen.
 
 ---
 
-# 🟦 WICHTIG:
-
-**Diese Version enthält garantierte Markdown-Abstände.**
-GitHub wird sie **NICHT zusammenziehen**.
-Sie wird exakt so dargestellt, wie du es erwartest.
-
----
-
-Wenn du willst, kann ich:
-
-### ✔ die Root-README des Repos genauso schön machen
-
-### ✔ das Frontend-README erzeugen
-
-### ✔ die nächsten Backend-Module (events/stories/users) vorbereiten
-
-### ✔ oder die Admin-/AI-/I18N-Architektur anlegen
-
-Was soll als nächstes kommen?
