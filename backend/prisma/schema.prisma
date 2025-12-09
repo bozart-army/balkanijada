@@ -149,3 +149,77 @@ model StoryTranslation {
   slug      String        @unique
 }
 
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  passwordHash String
+  name        String
+  avatarUrl   String?
+  language    LanguageCode?
+  cityId      String?
+  city        City?    @relation(fields: [cityId], references: [id])
+  role        UserRole @default(USER)
+  savedPlaces UserSavedPlace[]
+  savedEvents UserSavedEvent[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum UserRole {
+  USER
+  ORGANIZER
+  MODERATOR
+  ADMIN
+}
+
+model Organizer {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  name       String
+  website    String?
+  instagram  String?
+  facebook   String?
+  avatar     String?
+  createdAt  DateTime @default(now())
+}
+
+model PlaceClaim {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  placeId    String
+  place      Place    @relation(fields: [placeId], references: [id])
+  status     PlaceClaimStatus @default(PENDING)
+  proofUrl   String?
+  createdAt  DateTime @default(now())
+}
+
+enum PlaceClaimStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model UserSavedPlace {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  placeId   String
+  place     Place    @relation(fields: [placeId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, placeId])
+}
+
+model UserSavedEvent {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, eventId])
+}
+
