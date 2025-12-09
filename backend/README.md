@@ -25,6 +25,7 @@ Es stellt REST-APIs bereit für:
 
 ## 2. Projektstruktur (Backend)
 
+```
 backend/
 │
 ├── src/
@@ -52,6 +53,7 @@ backend/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
 
 
 ---
