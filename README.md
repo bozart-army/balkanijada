@@ -173,6 +173,3 @@ Balkanijada soll langfristig zur **führenden Plattform für Balkan-Diaspora-Kul
 für Essen, Musik, Events, Geschichten und Community.
 
 Dieses Repository bildet die technische Grundlage dafür.
-
-````
-
