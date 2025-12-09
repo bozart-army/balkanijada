@@ -75,3 +75,77 @@ model PlaceTranslation {
   description String
   slug        String        @unique
 }
+
+enum EventCategory {
+  CONCERT
+  PARTY
+  CULTURE
+  COMMUNITY
+  FOOD
+  OTHER
+}
+
+enum EventStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum StoryCategory {
+  CITY_GUIDE
+  DIASPORA_STORY
+  FOOD_CULTURE
+  INTERVIEW
+  OTHER
+}
+
+model Event {
+  id           String          @id @default(uuid())
+  placeId      String?
+  place        Place?          @relation(fields: [placeId], references: [id])
+  category     EventCategory
+  startTime    DateTime
+  endTime      DateTime?
+  cityId       String
+  city         City            @relation(fields: [cityId], references: [id])
+  countryCode  String
+  images       String[]
+  tags         String[]
+  status       EventStatus     @default(DRAFT)
+  organizerId  String?
+  translations EventTranslation[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model EventTranslation {
+  id          String        @id @default(uuid())
+  eventId     String
+  event       Event         @relation(fields: [eventId], references: [id])
+  lang        LanguageCode
+  title       String
+  description String
+  slug        String        @unique
+}
+
+model Story {
+  id           String              @id @default(uuid())
+  category     StoryCategory
+  coverImage   String?
+  authorId     String?
+  translations StoryTranslation[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model StoryTranslation {
+  id        String        @id @default(uuid())
+  storyId   String
+  story     Story         @relation(fields: [storyId], references: [id])
+  lang      LanguageCode
+  title     String
+  content   String
+  slug      String        @unique
+}
+
