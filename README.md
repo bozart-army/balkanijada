@@ -1,121 +1,178 @@
-# 🇧🇦 Balkanijada  
-### *The global Balkan diaspora platform for places, events & stories.*
+# 🇧🇦 Balkanijada
 
-Balkanijada ist eine moderne Webplattform, die der weltweiten Balkan-Diaspora
-einen zentralen Ort bietet, um **Restaurants, Clubs, Kulturorte, Events,
-Geschichten und Community-Life** an jedem Ort der Welt zu entdecken.
+**Balkanijada** ist eine Plattform für die weltweite Balkan-Diaspora.  
+Sie verbindet Orte, Events und Stories rund um Balkan-Kultur in einer modernen, mehrsprachigen Web-App.
 
-Unser Ziel ist es, die Balkan-Kultur sichtbar zu machen – authentisch,
-modern, vernetzt und mehrsprachig.
+Ziel:
+- Die erste Anlaufstelle weltweit für Balkan-Restaurants, Clubs, Kulturorte, Events und Community-Stories zu werden.
 
 ---
 
-## 🌍 Features (MVP Scope)
+## 1. Was ist Balkanijada?
 
-### **Places (Orte)**
-- Balkan-Restaurants, Bars, Clubs, Kulturzentren & Shops
-- Kategorien, Tags, City-Pages, Map-Ansicht
-- User können Orte empfehlen oder einreichen
+Balkanijada ist:
 
-### **Events**
-- Event-Listing, Event-Kalender, Event-Cards
-- Städte-Filter, Kategorien, Featured Events
-- Organizers können eigene Events erstellen
+- ein **Orte-Verzeichnis** für Balkan-Restaurants, Bars, Clubs, Kulturzentren, Shops
+- ein **Event-Hub** für Konzerte, Partys, Festivals, Community-Events
+- ein **Story-/Magazin-Bereich** für City-Guides, Diaspora-Geschichten und Interviews
+- eine **Plattform für Organizer & Locations**, um ihre Zielgruppe direkt zu erreichen
 
-### **Stories & Guides**
-- City-Guides, Diaspora-Stories, Interviews
-- Verlinkung zu Orten & Events
-- SEO-optimierte Inhalte
-
-### **User System**
-- Accounts, Profile, Favoriten
-- My Places, My Events  
-- Mehrsprachigkeit pro User
-
-### **Mehrsprachigkeit**
-DE • EN • HR • SR • BS  
-(weitere Sprachen folgen)
+Fokus: **Diaspora**, Mehrsprachigkeit und Balkan-Kultur – nicht generisches Nightlife.
 
 ---
 
-## 🧱 Tech Stack (Planned)
+## 2. Zielgruppen
 
-### Frontend
-- **Next.js (App Router)**
-- **TypeScript**
-- **TailwindCSS**
-- **Mapbox / Leaflet** für Karten
-- **React Server Components**
+- **Community / Nutzer**
+  - Menschen mit Balkan-Wurzeln im Ausland
+  - Freunde und Fans von Balkan-Kultur
+  - Reisende, die „echten“ Balkan suchen
 
-### Backend
-- **Node.js**
-- **NestJS** (modulare API)
-- **Prisma ORM**
-- **PostgreSQL**
-- Token-basierte Authentifizierung
+- **Locations / Orte**
+  - Restaurants, Bars, Clubs, Bäckereien, Shops
+  - Kulturzentren, Vereine, Kirchen, Moscheen
+  - Dienstleister mit Fokus auf Balkan-Community
 
-### Infrastruktur
-- Docker
-- GitHub Actions
-- Vercel / Fly.io / Railway (Evaluation)
-- CI/CD Pipeline
+- **Organizer / Partner**
+  - Eventveranstalter, Promoter, Agenturen
+  - Festival-Organisatoren
+  - Kulturinstitutionen
 
 ---
 
-## 🧠 AI Integration (Planned)
+## 3. Kernfeatures (MVP)
 
-- AI-Textpolish (Places, Events, Stories)
-- AI-Translations (DE/EN/HR/SR/BS)
-- Auto-Tagging für Orte & Events
-- Duplicate-Erkennung
-- City-Guides Generator
-- Recommendations Engine
+### 3.1 Places (Orte)
 
----
+- Orte mit Kategorie (Food, Nightlife, Culture, Services usw.)
+- Stadt- und Länderfilter
+- Kartenansicht (Maps)
+- Detailseiten mit Bildern, Öffnungszeiten, Kontaktdaten
+- User-Favoriten („Save Place“)
+- Mehrsprachige Beschreibungen (DE / EN / HR / SR / BS)
 
-## 📚 Documentation
+### 3.2 Events
 
-Die technische Dokumentation liegt im Ordner:
+- Event-Listen + Kalenderansicht
+- Filter (Stadt, Datum, Kategorie, Tags)
+- Event-Detailseiten mit Ort, Map und Beschreibung
+- Organizer können Events einreichen
+- Moderationsfluss: draft → pending_review → published
 
-```
-/docs
-```
+### 3.3 Stories & Guides
 
-Dort findest du:
-- Projektvision
-- Feature-Übersicht
-- Architektur
-- Datenmodell
-- API-Design
-- i18n-Strategie
-- KI-Automationskonzept
+- Magazin-/Blog-Bereich
+- Kategorien:
+  - City Guides
+  - Diaspora Stories
+  - Food & Culture
+  - Interviews
+- Verknüpfung mit Orten und Events
+- Mehrsprachige Inhalte
 
----
+### 3.4 User & Organizer
 
-## 🤝 Contributing
-
-Balkanijada wird schrittweise als Open Project aufgebaut.
-
-Pull Requests, Issues und Diskussionen sind jederzeit willkommen.
-
----
-
-## 📜 License
-
-Dieses Projekt steht unter der **MIT License**.
+- User-Accounts mit Profil, Sprache, Stadt
+- Favoriten: Orte & Events speichern
+- Organizer-Profil für Veranstalter / Locations
+- Claim-System für Orte (Eigentümer beansprucht Location)
 
 ---
 
-## ✨ Status
+## 4. Mehrsprachigkeit & AI (Roadmap)
 
-🚧 **In Entwicklung (MVP Phase)**  
-Frontend-Skeleton, Backend-Architecture und Datenmodelle werden aktuell aufgebaut.
+- Sprachen:
+  - Deutsch (DE)
+  - Englisch (EN)
+  - Kroatisch (HR)
+  - Serbisch (SR)
+  - Bosnisch (BS)
+
+- Geplante AI-Funktionen:
+  - Text-Polishing für Beschreibungen
+  - automatische Übersetzungen
+  - Auto-Tagging (Küche, Musik, Eventtyp)
+  - Duplicate-Erkennung
+  - Empfehlungen („Ähnliche Orte/Events“)
+  - City-Summaries für Balkan-Hotspots
 
 ---
 
-## 🔥 About
+## 5. Repository-Struktur
 
-Balkanijada ist ein unabhängiges, community-orientiertes Plattform-Projekt,
-entwickelt von **Sálè / Bozart Army** zur Stärkung und Vernetzung
-der weltweiten Balkan-Diaspora.
+```text
+balkanijada/
+│
+├── backend/                # NestJS Backend API (Node, TS, Prisma, PostgreSQL)
+│   ├── src/
+│   ├── prisma/
+│   └── README.md
+│
+├── docs/                   # Projekt-Dokumentation
+│   ├── 01_VISION.md
+│   ├── 02_FEATURES_OVERVIEW.md
+│   ├── 03_SYSTEM_ARCHITECTURE.md
+│   └── 04_DATA_MODEL_OVERVIEW.md
+│
+├── .env.example            # Beispiel-Env-Konfiguration (ohne Secrets)
+├── LICENSE
+└── README.md               # Diese Datei
+````
+
+Geplant (später):
+
+* `frontend/` – Next.js 14 (App Router, TypeScript, Tailwind)
+* `infra/` – Deployment, Docker, CI/CD-Konfigurationen
+
+---
+
+## 6. Tech-Stack (geplant)
+
+* **Frontend:** Next.js, React, TypeScript, TailwindCSS, Map-Integration
+* **Backend:** NestJS, TypeScript, Prisma
+* **Datenbank:** PostgreSQL
+* **Hosting:** tbd (z. B. Vercel + Railway/Fly.io/Render)
+* **Auth:** JWT (mit Rollen: user, organizer, moderator, admin)
+* **AI:** OpenAI-basierte Pipelines (Text, Translation, Tagging)
+
+Details zur Architektur findest du in:
+
+* `docs/03_SYSTEM_ARCHITECTURE.md`
+* `backend/README.md`
+
+---
+
+## 7. Status
+
+Aktueller Stand:
+
+* Vision & Features dokumentiert (`/docs`)
+* Datenmodell (Prisma-Schema) für:
+
+  * Cities, Places, PlaceTranslations
+  * Events, EventTranslations
+  * Stories, StoryTranslations
+  * User, Organizer, PlaceClaim
+  * UserSavedPlace, UserSavedEvent
+* Backend-Skeleton (NestJS) mit erstem Places-Modul
+* Env-Struktur (`.env.example`)
+
+Nächste Schritte (Roadmap):
+
+* Frontend-Skeleton aufsetzen (Next.js)
+* NestJS-Module für Events, Stories, Users, Organizers
+* Prisma-Anbindung & erste echte API-Endpunkte
+* Admin-/Moderations-Workflow
+* AI-gestützte Funktionen (Text, Übersetzung, Tagging)
+
+---
+
+## 8. Projektziel
+
+Balkanijada soll langfristig zur **führenden Plattform für Balkan-Diaspora-Kultur weltweit** werden –
+für Essen, Musik, Events, Geschichten und Community.
+
+Dieses Repository bildet die technische Grundlage dafür.
+
+````
 
