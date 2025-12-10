@@ -1,6 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// Diese Werte holen wir gleich von Supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Sicherheitscheck: Warnung, falls die Keys fehlen
+if (!supabaseUrl || !supabaseKey) {
+  console.warn('⚠️ Supabase Umgebungsvariablen sind nicht gesetzt!');
+}
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
