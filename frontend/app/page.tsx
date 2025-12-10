@@ -1,26 +1,32 @@
 import { supabase } from '@/lib/supabase';
 
+// Diese Funktion holt die Orte aus der Datenbank
 async function getPlaces() {
-  // Hier holen wir die Orte mit ihren deutschen Übersetzungen
-  const { data, error } = await supabase
-    .from('places')
-    .select(`
-      *,
-      city:cities(name),
-      translations:place_translations(*)
-    `)
-    .eq('status', 'published')
-    .limit(6);
+  try {
+    const { data, error } = await supabase
+      .from('places')
+      .select(`
+        *,
+        city:cities(name),
+        translations:place_translations(*)
+      `)
+      .eq('status', 'published')
+      .limit(6);
 
-  if (error) {
-    console.error('Error fetching places:', error);
+    if (error) {
+      console.error('Fehler beim Laden der Orte:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Verbindungsfehler:', error);
     return [];
   }
-
-  return data || [];
 }
 
 export default async function HomePage() {
+  // Hier rufen wir die Daten ab
   const places = await getPlaces();
 
   return (
@@ -52,150 +58,107 @@ export default async function HomePage() {
           maxWidth: '600px',
           margin: '0 auto'
         }}>
-          Die Plattform für die weltweite Balkan-Diaspora.
+          {places.length > 0 
+            ? `🎉 ${places.length} Balkan-Orte live aus der Datenbank!` 
+            : 'Die Plattform für die weltweite Balkan-Diaspora.'
+          }
         </p>
       </div>
 
-      {/* Hero Abschnitt */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.05)',
-        borderRadius: '24px',
-        padding: '60px 40px',
-        marginBottom: '60px',
-        border: '1px solid rgba(255, 255, 255, 0.1)'
-      }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
-          Kultur. Gemeinschaft. Heimatgefühl.
+      {/* LIVE-DATEN BEREICH */}
+      <div style={{ marginTop: '40px', marginBottom: '60px' }}>
+        <h2 style={{ fontSize: '2.5rem', marginBottom: '30px', color: '#E0A325' }}>
+          {places.length > 0 ? '🎯 Live aus unserer Datenbank:' : 'Datenbank wird vorbereitet...'}
         </h2>
-        <p style={{
-          fontSize: '1.2rem',
-          marginBottom: '40px',
-          maxWidth: '700px',
-          margin: '0 auto 40px',
-          lineHeight: 1.6
-        }}>
-          Finde <strong style={{ color: '#E0A325' }}>authentische Orte</strong>, entdecke <strong style={{ color: '#BA1B1D' }}>lebendige Events</strong> und teile <strong style={{ color: '#1C3F95' }}>unsere Geschichten</strong>. Verbunden in jeder Stadt.
-        </p>
-        <div style={{
-          display: 'flex',
-          gap: '20px',
-          justifyContent: 'center',
-          flexWrap: 'wrap'
-        }}>
-          <button style={{
-            background: '#BA1B1D',
-            color: 'white',
-            border: 'none',
-            padding: '16px 32px',
-            borderRadius: '12px',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer'
-          }}>
-            Orte entdecken
-          </button>
-          <button style={{
-            background: 'transparent',
-            color: 'white',
-            border: '2px solid #1C3F95',
-            padding: '16px 32px',
-            borderRadius: '12px',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer'
-          }}>
-            Für Organizer
-          </button>
-        </div>
-      </div>
-
-      {/* Feature-Vorschau */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '30px',
-        marginTop: '60px'
-      }}>
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.03)',
-          padding: '30px',
-          borderRadius: '16px',
-          border: '1px solid rgba(186, 27, 29, 0.3)'
-        }}>
-          <h3 style={{ color: '#BA1B1D', fontSize: '1.8rem' }}>Orte</h3>
-          <p>Restaurants, Cafés, Clubs und Kulturzentren der Balkan-Diaspora weltweit.</p>
-        </div>
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.03)',
-          padding: '30px',
-          borderRadius: '16px',
-          border: '1px solid rgba(224, 163, 37, 0.3)'
-        }}>
-          <h3 style={{ color: '#E0A325', fontSize: '1.8rem' }}>Events</h3>
-          <p>Konzerte, Festivals und Partys mit Balkan-Flair in deiner Stadt.</p>
-        </div>
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.03)',
-          padding: '30px',
-          borderRadius: '16px',
-          border: '1px solid rgba(28, 63, 149, 0.3)'
-        }}>
-          <h3 style={{ color: '#1C3F95', fontSize: '1.8rem' }}>Stories</h3>
-          <p>Geschichten, Interviews und Guides aus der Diaspora-Community.</p>
-        </div>
-      </div>
-
-      {/* Neue Sektion: Live-Daten aus der Datenbank */}
-      <div style={{ marginTop: '80px' }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '40px' }}>Entdecke Balkan-Orte in Wien</h2>
+        
         {places.length > 0 ? (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '30px',
-            marginTop: '40px'
+            marginTop: '30px'
           }}>
             {places.map((place) => {
               const germanTranslation = place.translations?.find((t: any) => t.lang === 'de');
               return (
                 <div key={place.id} style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: 'rgba(255, 255, 255, 0.07)',
                   borderRadius: '16px',
-                  padding: '20px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  textAlign: 'left'
+                  padding: '25px',
+                  border: '2px solid rgba(224, 163, 37, 0.3)',
+                  textAlign: 'left',
+                  transition: 'transform 0.3s',
+                  cursor: 'pointer'
                 }}>
-                  <img 
-                    src={place.images?.[0] || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800'} 
-                    alt={germanTranslation?.name} 
-                    style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px' }}
-                  />
-                  <h3 style={{ color: '#E0A325', fontSize: '1.5rem', marginTop: '15px' }}>
-                    {germanTranslation?.name || 'Unbekannter Ort'}
+                  <div style={{
+                    width: '100%',
+                    height: '180px',
+                    backgroundImage: `url(${place.images?.[0] || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800'})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: '12px',
+                    marginBottom: '15px'
+                  }} />
+                  <h3 style={{ 
+                    color: '#E0A325', 
+                    fontSize: '1.5rem', 
+                    marginBottom: '10px',
+                    fontWeight: 'bold'
+                  }}>
+                    {germanTranslation?.name || place.category}
                   </h3>
-                  <p style={{ color: '#ccc', marginTop: '10px' }}>
-                    {germanTranslation?.description || 'Keine Beschreibung verfügbar.'}
+                  <p style={{ 
+                    color: '#ccc', 
+                    fontSize: '0.95rem',
+                    lineHeight: '1.5',
+                    marginBottom: '15px'
+                  }}>
+                    {germanTranslation?.description || 'Authentischer Balkan-Geschmack.'}
                   </p>
-                  <div style={{ marginTop: '15px' }}>
-                    {place.tags?.map((tag: string, index: number) => (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {place.tags?.slice(0, 3).map((tag: string, index: number) => (
                       <span key={index} style={{
-                        background: '#1C3F95',
-                        color: 'white',
-                        padding: '5px 10px',
+                        background: 'rgba(186, 27, 29, 0.2)',
+                        color: '#FF9999',
+                        padding: '6px 12px',
                         borderRadius: '20px',
                         fontSize: '0.8rem',
-                        marginRight: '5px'
+                        border: '1px solid rgba(186, 27, 29, 0.5)'
                       }}>
-                        {tag}
+                        #{tag}
                       </span>
                     ))}
+                  </div>
+                  <div style={{ 
+                    marginTop: '15px', 
+                    paddingTop: '15px', 
+                    borderTop: '1px solid rgba(255,255,255,0.1)',
+                    color: '#AAA',
+                    fontSize: '0.9rem'
+                  }}>
+                    📍 {place.address || 'Wien'} • 🏷️ {place.category}
                   </div>
                 </div>
               );
             })}
           </div>
         ) : (
-          <p>Keine Orte gefunden. Bitte füge einige Orte in der Datenbank hinzu.</p>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: '16px',
+            padding: '40px',
+            margin: '30px auto',
+            maxWidth: '600px'
+          }}>
+            <p style={{ fontSize: '1.1rem', marginBottom: '20px' }}>
+              ⚙️ <strong>Nächster Schritt:</strong> Supabase-Datenbank einrichten
+            </p>
+            <ol style={{ textAlign: 'left', lineHeight: '1.8', paddingLeft: '20px' }}>
+              <li>Erstelle ein kostenloses Projekt auf <a href="https://supabase.com" style={{ color: '#3ECF8E' }}>supabase.com</a></li>
+              <li>Führe das <code>schema.sql</code> in der SQL-Console aus</li>
+              <li>Trage die Keys in Vercel ein (Umgebungsvariablen)</li>
+            </ol>
+          </div>
         )}
       </div>
 
@@ -205,10 +168,15 @@ export default async function HomePage() {
         paddingTop: '40px',
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
         fontSize: '0.9rem',
-        opacity: 0.7
+        opacity: 0.8
       }}>
-        <p>Balkanijada – Eine Heimat für die Diaspora. Built with Vision. 🇧🇦</p>
-        <p style={{ marginTop: '10px' }}>Nächster Schritt: Datenbank-Anbindung & Live-Deployment!</p>
+        <p>
+          <strong>🚀 Balkanijada Tech-Status:</strong> 
+          {places.length > 0 ? ' ✅ Live-Daten' : ' ⏳ Datenbank vorbereiten'}
+        </p>
+        <p style={{ marginTop: '10px', fontSize: '0.85rem' }}>
+          Next.js Frontend • Supabase Backend • Vercel Hosting
+        </p>
       </footer>
     </main>
   );
