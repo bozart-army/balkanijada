@@ -1,20 +1,16 @@
 export default function HomePage() {
   return (
-    <html lang="de">
-      <body style={{
-        margin: 0,
-        padding: 0,
-        fontFamily: 'system-ui, sans-serif',
-        background: 'linear-gradient(135deg, #0C0C0C 0%, #1C3F95 100%)',
-        color: 'white',
-        minHeight: '100vh'
-      }}>
-        <main style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '40px 20px',
-          textAlign: 'center'
-        }}>
+    <main style={{
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '40px 20px',
+  textAlign: 'center',
+  // ▲ DIESE 4 ZEILEN UNTEN EINFÜGEN ▼
+  fontFamily: 'system-ui, sans-serif',
+  background: 'linear-gradient(135deg, #0C0C0C 0%, #1C3F95 100%)',
+  color: 'white',
+  minHeight: '100vh'
+}}>
           {/* Logo / Titel */}
           <div style={{ marginBottom: '60px' }}>
             <h1 style={{
@@ -138,7 +134,5 @@ export default function HomePage() {
             <p style={{ marginTop: '10px' }}>Nächster Schritt: Datenbank-Anbindung & Live-Deployment!</p>
           </footer>
         </main>
-      </body>
-    </html>
   );
 }
